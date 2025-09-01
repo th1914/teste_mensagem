@@ -3,66 +3,146 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Desafio Divertido</title>
+<title>Desafio Frozen ❄️</title> <!-- <- Título da aba do navegador, pode ser alterado -->
+
 <style>
+  /* ====================== ESTILO DO BODY ====================== */
   body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f8ff;
+    font-family: 'Arial', sans-serif; /* <- Fonte da página, pode trocar para outra */
+    display: flex; /* <- Layout flexível */
+    flex-direction: column; /* <- Coloca elementos em coluna */
+    justify-content: center; /* <- Centraliza verticalmente */
+    align-items: center; /* <- Centraliza horizontalmente */
+    height: 100vh; /* <- Altura total da tela */
+    margin: 0;
+    background: linear-gradient(to bottom, #a2dfff, #ffffff); /* <- Fundo degradê azul-branco */
+    overflow: hidden; /* <- Evita barras de rolagem */
+    position: relative; /* <- Necessário para posicionar neve e botões absolutos */
   }
+
+  /* ====================== TÍTULO PRINCIPAL ====================== */
   h1 {
-    margin-bottom: 30px;
+    margin-bottom: 30px; /* <- Espaço abaixo do título */
+    color: #0a3d62; /* <- Cor do texto */
+    text-shadow: 2px 2px 5px #cce6ff; /* <- Sombra para efeito "gelado" */
+    text-align: center; /* <- Centraliza o texto */
   }
+
+  /* ====================== ESTILO DOS BOTÕES ====================== */
   button {
-    padding: 15px 30px;
-    margin: 10px;
-    font-size: 18px;
-    cursor: pointer;
-    position: relative;
-    transition: all 0.2s ease;
+    padding: 15px 30px; /* <- Espaço interno (altura x largura) */
+    margin: 10px; /* <- Espaço entre os botões */
+    font-size: 18px; /* <- Tamanho da fonte */
+    cursor: pointer; /* <- Muda o cursor ao passar por cima */
+    position: relative; /* <- Necessário para movimento absoluto do "Não" */
+    border: none; /* <- Remove borda padrão */
+    border-radius: 8px; /* <- Bordas arredondadas */
+    transition: all 0.3s ease; /* <- Animações suaves para movimento, rotação e cor */
+  }
+
+  /* ====================== BOTÃO "SIM" ====================== */
+  #sim {
+    background: #0a3d62; /* <- Cor azul escuro */
+    color: #fff; /* <- Cor do texto */
+    box-shadow: 0 0 10px #0a3d62; /* <- Sombra */
+  }
+
+  #sim:hover {
+    box-shadow: 0 0 20px #74b9ff; /* <- Efeito de brilho ao passar mouse */
+    transform: scale(1.1); /* <- Aumenta o botão levemente */
+  }
+
+  /* ====================== BOTÃO "NÃO" ====================== */
+  #nao {
+    background: #74b9ff; /* <- Cor azul claro */
+    color: #0a3d62; /* <- Texto azul escuro */
+  }
+
+  /* ====================== NEVE CAINDO ====================== */
+  .snowflake {
+    position: absolute; /* <- Necessário para movimentar livremente */
+    color: white; /* <- Cor da neve */
+    font-size: 1em; /* <- Tamanho inicial da neve, será alterado dinamicamente */
+    top: -10px; /* <- Começa fora da tela */
+    user-select: none; /* <- Não permite seleção do emoji */
+    pointer-events: none; /* <- Não interfere em cliques */
+    animation-name: fall; /* <- Nome da animação */
+    animation-duration: 10s; /* <- Tempo para cair toda a tela */
+    animation-iteration-count: infinite; /* <- Repete infinitamente */
+    animation-timing-function: linear; /* <- Velocidade constante */
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); } /* <- Começo da animação */
+    100% { transform: translateY(100vh) rotate(360deg); } /* <- Cai e gira */
   }
 </style>
 </head>
 <body>
-<h1>Quer aceitar o desafio?</h1>
+
+<!-- ====================== TÍTULO DA PÁGINA ====================== -->
+<h1>Quer aceitar o desafio da Frozen? ❄️</h1> <!-- <- Pode mudar o texto -->
+
+<!-- ====================== BOTÕES ====================== -->
 <div>
-  <button id="sim">Sim</button>
-  <button id="nao">Não</button>
+  <button id="sim">Sim</button> <!-- <- Texto do botão "Sim" -->
+  <button id="nao">Não</button> <!-- <- Texto do botão "Não" -->
 </div>
 
 <script>
-const nao = document.getElementById('nao');
+/* ====================== SCRIPT ====================== */
+const nao = document.getElementById('nao'); // <- Seleciona o botão "Não"
 const body = document.body;
 
+/* Função que move o botão "Não" aleatoriamente na tela */
 function moverBotao() {
-    // Pega tamanho da tela
-    const width = window.innerWidth - nao.offsetWidth;
-    const height = window.innerHeight - nao.offsetHeight;
+    const width = window.innerWidth - nao.offsetWidth; // <- Limite horizontal
+    const height = window.innerHeight - nao.offsetHeight; // <- Limite vertical
 
-    // Gera posição aleatória
-    const x = Math.floor(Math.random() * width);
-    const y = Math.floor(Math.random() * height);
+    const x = Math.floor(Math.random() * width); // <- posição aleatória X
+    const y = Math.floor(Math.random() * height); // <- posição aleatória Y
 
-    // Aplica nova posição
     nao.style.position = 'absolute';
     nao.style.left = x + 'px';
     nao.style.top = y + 'px';
+
+    // Rotação aleatória
+    const angulo = Math.floor(Math.random() * 360);
+    nao.style.transform = `rotate(${angulo}deg)`;
+
+    // Cor aleatória azul (tons de Frozen)
+    const azul = Math.floor(Math.random() * 256);
+    nao.style.backgroundColor = `rgb(0,${azul},255)`;
 }
 
-// Quando o mouse entrar no botão, ele foge
-nao.addEventListener('mouseenter', moverBotao);
+/* Eventos de interação com o botão "Não" */
+nao.addEventListener('mouseenter', moverBotao); // <- Mouse passa por cima
+nao.addEventListener('touchstart', moverBotao); // <- Toque em celular
 
-// Para toque em celular
-nao.addEventListener('touchstart', moverBotao);
-
-// Mensagem de clique no botão Sim
+/* Botão "Sim" exibe alerta */
 document.getElementById('sim').addEventListener('click', () => {
-    alert('Você aceitou o desafio! 🎉');
+    alert('Você aceitou o desafio Frozen! ❄️🎉'); // <- Mensagem pode ser alterada
 });
+
+/* Função que cria flocos de neve na tela */
+function criarNeve() {
+    const flake = document.createElement('div'); // <- Cria elemento
+    flake.className = 'snowflake'; // <- Aplica classe
+    flake.style.left = Math.random() * window.innerWidth + 'px'; // <- Posição horizontal aleatória
+    flake.style.fontSize = (Math.random() * 20 + 10) + 'px'; // <- Tamanho aleatório
+    flake.style.opacity = Math.random(); // <- Transparência aleatória
+    flake.innerText = '❄️'; // <- Emoji da neve
+    body.appendChild(flake); // <- Adiciona ao body
+
+    // Remove floco após cair
+    setTimeout(() => {
+        flake.remove();
+    }, 10000); // <- 10 segundos para remover
+}
+
+/* Intervalo que cria neve constantemente */
+setInterval(criarNeve, 200); // <- A cada 200ms cria um floco
 </script>
+
 </body>
 </html>
