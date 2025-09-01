@@ -3,28 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Desafio Picante 🔥</title> <!-- <- Título da aba -->
-
+<title>Desafio Picante Interativo 🔥</title>
 <style>
   /* ====================== ESTILO DO BODY ====================== */
   body {
-    font-family: 'Arial', sans-serif; /* <- Fonte da página */
+    font-family: 'Arial', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background: linear-gradient(to bottom, #ffcccc, #ff6699); /* <- Fundo quente/picante */
+    background: linear-gradient(to bottom, #ffcccc, #ff6699); /* Fundo quente */
     overflow: hidden;
     position: relative;
   }
 
-  /* ====================== TÍTULO PRINCIPAL ====================== */
+  /* ====================== TÍTULO ====================== */
   h1 {
     margin-bottom: 30px;
-    color: #fff; /* <- Cor branca para contraste */
-    text-shadow: 2px 2px 5px #ff0000; /* <- Sombra vermelha */
+    color: #fff;
+    text-shadow: 2px 2px 5px #ff0000;
     text-align: center;
   }
 
@@ -37,10 +36,10 @@
     position: relative;
     border: none;
     border-radius: 12px;
-    transition: all 0.3s ease;
+    transition: all 0.1s ease; /* efeito rápido para o botão "Não" */
   }
 
-  /* Botão "Sim" picante */
+  /* Botão Sim */
   #sim {
     background: #ff3366;
     color: #fff;
@@ -52,13 +51,13 @@
     transform: scale(1.1);
   }
 
-  /* Botão "Não" provocante */
+  /* Botão Não */
   #nao {
     background: #ff6699;
     color: #fff;
   }
 
-  /* ====================== CORAÇÕES CAINDO ====================== */
+  /* ====================== CORAÇÕES ====================== */
   .heart {
     position: absolute;
     color: #ff3366;
@@ -80,50 +79,69 @@
 </head>
 <body>
 
-<h1>Quer aceitar o desafio picante? 🔥</h1> <!-- <- Título principal -->
+<h1>Quer aceitar o desafio picante? 🔥</h1>
 
 <div>
-  <button id="sim">Sim 🔥</button> <!-- <- Texto do botão "Sim" -->
-  <button id="nao">Não 😏</button> <!-- <- Texto do botão "Não" -->
+  <button id="sim">Sim 🔥</button>
+  <button id="nao">Não 😏</button>
 </div>
 
 <script>
 const nao = document.getElementById('nao');
+const sim = document.getElementById('sim');
 const body = document.body;
+let dificuldade = 1; // aumenta a dificuldade a cada toque
 
-/* Função para mover o botão "Não" aleatoriamente */
+/* ====================== BOTÃO NÃO ====================== */
 function moverBotao() {
     const width = window.innerWidth - nao.offsetWidth;
     const height = window.innerHeight - nao.offsetHeight;
 
-    const x = Math.floor(Math.random() * width);
-    const y = Math.floor(Math.random() * height);
+    // posição aleatória com dificuldade
+    const x = Math.floor(Math.random() * width * (1 - 0.05*dificuldade));
+    const y = Math.floor(Math.random() * height * (1 - 0.05*dificuldade));
 
     nao.style.position = 'absolute';
     nao.style.left = x + 'px';
     nao.style.top = y + 'px';
 
-    // Rotação aleatória
+    // rotação aleatória
     const angulo = Math.floor(Math.random() * 360);
     nao.style.transform = `rotate(${angulo}deg)`;
 
-    // Cor aleatória quente (tons de vermelho/rosa)
+    // cor aleatória quente
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 100);
     const b = Math.floor(Math.random() * 100);
     nao.style.backgroundColor = `rgb(${r},${g},${b})`;
+
+    // aumenta dificuldade
+    dificuldade += 0.2;
 }
 
-/* Eventos do botão "Não" */
+/* eventos do botão "Não" */
 nao.addEventListener('mouseenter', moverBotao);
 nao.addEventListener('touchstart', moverBotao);
 
-/* Botão "Sim" exibe alerta */
-document.getElementById('sim').addEventListener('click', () => {
-    alert('Você aceitou o desafio picante! 🔥😏');
+/* ====================== BOTÃO SIM ====================== */
+const mensagens = [
+    "Você aceitou o desafio! 🔥😏",
+    "Ousado(a)! ❤️",
+    "Mais rápido, tente pegar o 'Não'! 😜",
+    "Isso foi quente! 🔥",
+    "Cuidado! Ele foge cada vez mais! 😏"
+];
+
+sim.addEventListener('click', () => {
+    const msg = mensagens[Math.floor(Math.random() * mensagens.length)];
+    alert(msg);
+
+    // efeito de pulinho do botão
+    sim.style.transform = "scale(1.2)";
+    setTimeout(() => sim.style.transform = "scale(1)", 200);
 });
 
-/* Função para criar corações caindo */
+/* ====================== CORAÇÕES ====================== */
 function criarCoracao() {
     const heart = document.createElement('div');
     heart.className = 'heart';
@@ -138,9 +156,9 @@ function criarCoracao() {
     }, 8000);
 }
 
-/* Intervalo para criar corações constantemente */
-setInterval(criarCoracao, 200);
+setInterval(criarCoracao, 200); // cria corações constantemente
 </script>
 
 </body>
 </html>
+
