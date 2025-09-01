@@ -3,104 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Desafio Frozen ❄️</title> <!-- <- Título da aba do navegador, pode ser alterado -->
+<title>Desafio Picante 🔥</title> <!-- <- Título da aba -->
 
 <style>
   /* ====================== ESTILO DO BODY ====================== */
   body {
-    font-family: 'Arial', sans-serif; /* <- Fonte da página, pode trocar para outra */
-    display: flex; /* <- Layout flexível */
-    flex-direction: column; /* <- Coloca elementos em coluna */
-    justify-content: center; /* <- Centraliza verticalmente */
-    align-items: center; /* <- Centraliza horizontalmente */
-    height: 100vh; /* <- Altura total da tela */
+    font-family: 'Arial', sans-serif; /* <- Fonte da página */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
-    background: linear-gradient(to bottom, #a2dfff, #ffffff); /* <- Fundo degradê azul-branco */
-    overflow: hidden; /* <- Evita barras de rolagem */
-    position: relative; /* <- Necessário para posicionar neve e botões absolutos */
+    background: linear-gradient(to bottom, #ffcccc, #ff6699); /* <- Fundo quente/picante */
+    overflow: hidden;
+    position: relative;
   }
 
   /* ====================== TÍTULO PRINCIPAL ====================== */
   h1 {
-    margin-bottom: 30px; /* <- Espaço abaixo do título */
-    color: #0a3d62; /* <- Cor do texto */
-    text-shadow: 2px 2px 5px #cce6ff; /* <- Sombra para efeito "gelado" */
-    text-align: center; /* <- Centraliza o texto */
+    margin-bottom: 30px;
+    color: #fff; /* <- Cor branca para contraste */
+    text-shadow: 2px 2px 5px #ff0000; /* <- Sombra vermelha */
+    text-align: center;
   }
 
-  /* ====================== ESTILO DOS BOTÕES ====================== */
+  /* ====================== BOTÕES ====================== */
   button {
-    padding: 15px 30px; /* <- Espaço interno (altura x largura) */
-    margin: 10px; /* <- Espaço entre os botões */
-    font-size: 18px; /* <- Tamanho da fonte */
-    cursor: pointer; /* <- Muda o cursor ao passar por cima */
-    position: relative; /* <- Necessário para movimento absoluto do "Não" */
-    border: none; /* <- Remove borda padrão */
-    border-radius: 8px; /* <- Bordas arredondadas */
-    transition: all 0.3s ease; /* <- Animações suaves para movimento, rotação e cor */
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
   }
 
-  /* ====================== BOTÃO "SIM" ====================== */
+  /* Botão "Sim" picante */
   #sim {
-    background: #0a3d62; /* <- Cor azul escuro */
-    color: #fff; /* <- Cor do texto */
-    box-shadow: 0 0 10px #0a3d62; /* <- Sombra */
+    background: #ff3366;
+    color: #fff;
+    box-shadow: 0 0 15px #ff3366;
   }
 
   #sim:hover {
-    box-shadow: 0 0 20px #74b9ff; /* <- Efeito de brilho ao passar mouse */
-    transform: scale(1.1); /* <- Aumenta o botão levemente */
+    box-shadow: 0 0 25px #ff6699;
+    transform: scale(1.1);
   }
 
-  /* ====================== BOTÃO "NÃO" ====================== */
+  /* Botão "Não" provocante */
   #nao {
-    background: #74b9ff; /* <- Cor azul claro */
-    color: #0a3d62; /* <- Texto azul escuro */
+    background: #ff6699;
+    color: #fff;
   }
 
-  /* ====================== NEVE CAINDO ====================== */
-  .snowflake {
-    position: absolute; /* <- Necessário para movimentar livremente */
-    color: white; /* <- Cor da neve */
-    font-size: 1em; /* <- Tamanho inicial da neve, será alterado dinamicamente */
-    top: -10px; /* <- Começa fora da tela */
-    user-select: none; /* <- Não permite seleção do emoji */
-    pointer-events: none; /* <- Não interfere em cliques */
-    animation-name: fall; /* <- Nome da animação */
-    animation-duration: 10s; /* <- Tempo para cair toda a tela */
-    animation-iteration-count: infinite; /* <- Repete infinitamente */
-    animation-timing-function: linear; /* <- Velocidade constante */
+  /* ====================== CORAÇÕES CAINDO ====================== */
+  .heart {
+    position: absolute;
+    color: #ff3366;
+    font-size: 1em;
+    top: -10px;
+    user-select: none;
+    pointer-events: none;
+    animation-name: fall;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
   }
 
   @keyframes fall {
-    0% { transform: translateY(0) rotate(0deg); } /* <- Começo da animação */
-    100% { transform: translateY(100vh) rotate(360deg); } /* <- Cai e gira */
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
   }
 </style>
 </head>
 <body>
 
-<!-- ====================== TÍTULO DA PÁGINA ====================== -->
-<h1>Quer aceitar o desafio da Frozen? ❄️</h1> <!-- <- Pode mudar o texto -->
+<h1>Quer aceitar o desafio picante? 🔥</h1> <!-- <- Título principal -->
 
-<!-- ====================== BOTÕES ====================== -->
 <div>
-  <button id="sim">Sim</button> <!-- <- Texto do botão "Sim" -->
-  <button id="nao">Não</button> <!-- <- Texto do botão "Não" -->
+  <button id="sim">Sim 🔥</button> <!-- <- Texto do botão "Sim" -->
+  <button id="nao">Não 😏</button> <!-- <- Texto do botão "Não" -->
 </div>
 
 <script>
-/* ====================== SCRIPT ====================== */
-const nao = document.getElementById('nao'); // <- Seleciona o botão "Não"
+const nao = document.getElementById('nao');
 const body = document.body;
 
-/* Função que move o botão "Não" aleatoriamente na tela */
+/* Função para mover o botão "Não" aleatoriamente */
 function moverBotao() {
-    const width = window.innerWidth - nao.offsetWidth; // <- Limite horizontal
-    const height = window.innerHeight - nao.offsetHeight; // <- Limite vertical
+    const width = window.innerWidth - nao.offsetWidth;
+    const height = window.innerHeight - nao.offsetHeight;
 
-    const x = Math.floor(Math.random() * width); // <- posição aleatória X
-    const y = Math.floor(Math.random() * height); // <- posição aleatória Y
+    const x = Math.floor(Math.random() * width);
+    const y = Math.floor(Math.random() * height);
 
     nao.style.position = 'absolute';
     nao.style.left = x + 'px';
@@ -110,40 +107,40 @@ function moverBotao() {
     const angulo = Math.floor(Math.random() * 360);
     nao.style.transform = `rotate(${angulo}deg)`;
 
-    // Cor aleatória azul (tons de Frozen)
-    const azul = Math.floor(Math.random() * 256);
-    nao.style.backgroundColor = `rgb(0,${azul},255)`;
+    // Cor aleatória quente (tons de vermelho/rosa)
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 100);
+    const b = Math.floor(Math.random() * 100);
+    nao.style.backgroundColor = `rgb(${r},${g},${b})`;
 }
 
-/* Eventos de interação com o botão "Não" */
-nao.addEventListener('mouseenter', moverBotao); // <- Mouse passa por cima
-nao.addEventListener('touchstart', moverBotao); // <- Toque em celular
+/* Eventos do botão "Não" */
+nao.addEventListener('mouseenter', moverBotao);
+nao.addEventListener('touchstart', moverBotao);
 
 /* Botão "Sim" exibe alerta */
 document.getElementById('sim').addEventListener('click', () => {
-    alert('Você aceitou o desafio Frozen! ❄️🎉'); // <- Mensagem pode ser alterada
+    alert('Você aceitou o desafio picante! 🔥😏');
 });
 
-/* Função que cria flocos de neve na tela */
-function criarNeve() {
-    const flake = document.createElement('div'); // <- Cria elemento
-    flake.className = 'snowflake'; // <- Aplica classe
-    flake.style.left = Math.random() * window.innerWidth + 'px'; // <- Posição horizontal aleatória
-    flake.style.fontSize = (Math.random() * 20 + 10) + 'px'; // <- Tamanho aleatório
-    flake.style.opacity = Math.random(); // <- Transparência aleatória
-    flake.innerText = '❄️'; // <- Emoji da neve
-    body.appendChild(flake); // <- Adiciona ao body
+/* Função para criar corações caindo */
+function criarCoracao() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.fontSize = (Math.random() * 25 + 10) + 'px';
+    heart.style.opacity = Math.random();
+    heart.innerText = '❤️';
+    body.appendChild(heart);
 
-    // Remove floco após cair
     setTimeout(() => {
-        flake.remove();
-    }, 10000); // <- 10 segundos para remover
+        heart.remove();
+    }, 8000);
 }
 
-/* Intervalo que cria neve constantemente */
-setInterval(criarNeve, 200); // <- A cada 200ms cria um floco
+/* Intervalo para criar corações constantemente */
+setInterval(criarCoracao, 200);
 </script>
 
 </body>
 </html>
-
